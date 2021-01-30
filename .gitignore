@@ -1,0 +1,4 @@
+*.log
+.idea
+src/__pycache__
+src/selectmenu/__pycache__
