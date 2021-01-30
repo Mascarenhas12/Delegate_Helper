@@ -1,6 +1,8 @@
 import requests
 from core import Degree, Course, Student
 
+ACADEMIC_YEAR = "2020/2021"
+
 
 def api_url(route: str): return f"https://fenix.tecnico.ulisboa.pt/api/fenix/v1/{route}"
 
@@ -12,8 +14,8 @@ def error_response(response) -> None:
     print(f"Response Error: Status {response.status_code} and Reason {response.reason}")
 
 
-def get_degrees(academic_year: str) -> list:
-    response = requests.get(api_url("degrees"), data={"academicTerm": academic_year})
+def get_degrees() -> list:
+    response = requests.get(api_url("degrees"), data={"academicTerm": ACADEMIC_YEAR})
 
     if not validate_response(response):
         error_response(response)
@@ -21,3 +23,25 @@ def get_degrees(academic_year: str) -> list:
 
     data = response.json()
     return [Degree(d['id'], d['name'], d['acronym'], d['academicTerm']) for d in data]
+
+
+def get_degree_courses(degree_id: str) -> list:
+    response = requests.get(api_url(f"degrees/{degree_id}/courses"), data={"academicTerm": ACADEMIC_YEAR})
+
+    if not validate_response(response):
+        error_response(response)
+        return []
+
+    data = response.json()
+    return [Course(d['id'], d['name'], d['acronym'], d['academicTerm']) for d in data]
+
+
+def get_course_students(course_id: str) -> list:
+    response = requests.get(api_url(f"courses/{course_id}/students"), data={"academicTerm": ACADEMIC_YEAR})
+
+    if not validate_response(response):
+        error_response(response)
+        return []
+
+    data = response.json()
+    return [Student(d['username']) for d in data['students']]

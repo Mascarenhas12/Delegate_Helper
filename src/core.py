@@ -6,7 +6,7 @@ class Degree:
         self.academic_years = academic_years
 
     def __repr__(self) -> str:
-        return f"(id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_years})"
+        return f"id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_years}"
 
     def __eq__(self, o: object) -> bool:
         return isinstance(o, Degree) and o.id == self.id
@@ -20,7 +20,7 @@ class Course:
         self.academic_term = academic_term
 
     def __repr__(self) -> str:
-        return f"(id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_term})"
+        return f"id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_term}"
 
     def __eq__(self, o: object) -> bool:
         return isinstance(o, Course) and o.id == self.id
@@ -32,7 +32,7 @@ class Student:
         self.tecnico_id = int(username[3:])
 
     def __repr__(self) -> str:
-        return f"(id: {self.username})"
+        return f"id: {self.username}"
 
     def __eq__(self, o: object) -> bool:
         return isinstance(o, Student) and o.id == self.id

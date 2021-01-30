@@ -21,7 +21,6 @@ def action_exit():
 
 
 if __name__ == "__main__":
-
     start_menu = SelectMenu({
         '0. Exit': action_exit
     }, message='Start Menu')
