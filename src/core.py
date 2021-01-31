@@ -5,6 +5,9 @@ class Degree:
         self.acronym = acronym
         self.academic_years = academic_years
 
+    def __str__(self) -> str:
+        return self.acronym
+
     def __repr__(self) -> str:
         return f"id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_years}"
 
@@ -19,6 +22,9 @@ class Course:
         self.acronym = acronym
         self.academic_term = academic_term
 
+    def __str__(self) -> str:
+        return f"{self.acronym}, {self.name}"
+
     def __repr__(self) -> str:
         return f"id: {self.id}, name: {self.name}, acronym: {self.acronym}, academic_years: {self.academic_term}"
 
@@ -27,12 +33,15 @@ class Course:
 
 
 class Student:
-    def __init__(self, username: str):
+    def __init__(self, username: str, acronym):
         self.username = username
-        self.tecnico_id = int(username[3:])
+        self.degree_acronym = acronym
+
+    def __str__(self) -> str:
+        return f"{self.username}, {self.degree_acronym}"
 
     def __repr__(self) -> str:
-        return f"id: {self.username}"
+        return f"id: {self.username}, degree_acronym: {self.degree_acronym}"
 
     def __eq__(self, o: object) -> bool:
         return isinstance(o, Student) and o.id == self.id

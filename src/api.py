@@ -19,7 +19,7 @@ def get_degrees() -> list:
 
     if not validate_response(response):
         error_response(response)
-        return []
+        exit(-1)
 
     data = response.json()
     return [Degree(d['id'], d['name'], d['acronym'], d['academicTerm']) for d in data]
@@ -30,7 +30,7 @@ def get_degree_courses(degree_id: str) -> list:
 
     if not validate_response(response):
         error_response(response)
-        return []
+        exit(-1)
 
     data = response.json()
     return [Course(d['id'], d['name'], d['acronym'], d['academicTerm']) for d in data]
@@ -41,7 +41,7 @@ def get_course_students(course_id: str) -> list:
 
     if not validate_response(response):
         error_response(response)
-        return []
+        exit(-1)
 
     data = response.json()
-    return [Student(d['username']) for d in data['students']]
+    return [Student(d['username'], d['degree']['acronym']) for d in data['students']]
