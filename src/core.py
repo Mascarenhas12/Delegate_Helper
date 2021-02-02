@@ -44,4 +44,4 @@ class Student:
         return f"id: {self.username}, degree_acronym: {self.degree_acronym}"
 
     def __eq__(self, o: object) -> bool:
-        return isinstance(o, Student) and o.id == self.id
+        return isinstance(o, Student) and o.username == self.username
